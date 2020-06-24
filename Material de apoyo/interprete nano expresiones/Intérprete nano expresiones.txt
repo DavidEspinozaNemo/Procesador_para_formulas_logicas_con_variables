@@ -1,0 +1,64 @@
+Un intérprete para un lenguaje de expresiones
+Ignacio Trejos Zelaya, abril 2012, editado junio 2020
+
+(* interp.sml *)	1
+(* sintax.sml *)	1
+(* ambi.sml *)	1
+(* val.sml *)	1
+(* opers.sml *)	3
+(* eval.sml *)	3
+
+(* interp.sml *)
+
+(* Este archivo carga todos los componentes del interprete en el
+   orden correcto.
+*)
+
+use "sintax.sml"; (* sintaxis abstracta del minilenguaje *)
+use "val.sml";    (* valores semanticos *)
+use "eval.sml";   (* el evaluador *)
+
+(* sintax.sml *)
+
+(* Lenguaje de expresiones, sin abstracciones (no hay funciones) *)
+
+(* Aqui definimos la sintaxis abstracta de nuestro pequenno
+   lenguaje de programacion *)
+
+(* Las literales del lenguaje son enteras nada más *)
+
+type Literal = int
+
+(* Este es un lenguaje de expresiones, con las siguientes opciones:
+   - Literal (entera)
+   - Operaciones aritméticas entre enteros
+*)
+
+datatype Expresion =
+           ConstExp   of Literal
+         | OpMas      of Expresion * Expresion
+         | OpMenos    of Expresion * Expresion
+         | OpPor      of Expresion * Expresion
+         | OpEntre    of Expresion * Expresion
+
+
+(* Hay varias cosas en el interprete que no estan implementadas.
+   Ud. debera implementarlas. Los componentes no implementados
+   levantan esta excepcion cuando se trata de evaluarlos. *)
+
+exception NoImplementada of string
+
+(* ambi.sml *)
+
+(* Ambientes. *)
+(* Los ambientes son representados como listas de pares de objetos *)
+
+(* Al no haber variables, son innecesarios *)
+
+
+(* val.sml *)
+
+(* Valores semanticos.
+   Nuestro lenguaje es muy sencillo, solo admite literales enteras *)
+
+datatype Val = Evaluado of Literal
