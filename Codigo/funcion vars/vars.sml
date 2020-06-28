@@ -35,35 +35,50 @@ val f = constante false;
 val t = constante true;
 val prop1 = p :=>: q :<=>: ~: p :||: q;
 val prop2 = f :=>: p :<=>: q :=>: ~: f;
+(* funciones auxiliares *)
+(* filter filtra una lista de acuerdo con un predicado p *)
+
+fun filter p []      = []
+|   filter p (x::xs) = if p x then x :: filter p xs else filter p xs
+;
+
+
+(* nub obtiene una lista sin duplicados a partir de una lista arbitraria *)
+fun nub []      = []
+|   nub (x::xs) = x :: (nub (filter (fn y => x <> y) xs))
+;
+
 (* vars *)
 type str = string;
 
-fun vars prop =
+fun aux_vars prop =
 	case prop of
 		constante valor
 			=> [ ]
 	|	variable valor
 			=> [valor]
 	|	negacion prop1
-			=> vars prop1
+			=> aux_vars prop1
 	|	conjuncion (prop1, prop2)
-			=> let val valor1 = vars prop1
-				   and valor2 = vars prop2
+			=> let val valor1 = aux_vars prop1
+				   and valor2 = aux_vars prop2
 			   in valor1 @ valor2
 			   end
 	|   disyuncion (prop1, prop2)
-			=> let val valor1 = vars prop1
-				   and valor2 = vars prop2
+			=> let val valor1 = aux_vars prop1
+				   and valor2 = aux_vars prop2
 			   in valor1 @ valor2
 			   end
 	|	implicacion (prop1, prop2)
-			=> let val valor1 = vars prop1
-				   and valor2 = vars prop2
+			=> let val valor1 = aux_vars prop1
+				   and valor2 = aux_vars prop2
 			   in valor1 @ valor2
 			   end
 	|	equivalencia (prop1, prop2)
-			=> let val valor1 = vars prop1
-				   and valor2 = vars prop2
+			=> let val valor1 = aux_vars prop1
+				   and valor2 = aux_vars prop2
 			   in valor1 @ valor2
 			   end
 ;
+
+fun vars prop = nub aux_vars prop;
