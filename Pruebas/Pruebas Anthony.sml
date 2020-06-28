@@ -39,7 +39,7 @@ val (op :<=>:) = equivalencia
 ***********************************************************************
 (* Evaluador de proposiciones.
 
-   Hay un caso para cada variante de proposici�n.
+   Hay un caso para cada variante de proposicion.
 *)
 
 fun evalProp prop =
@@ -73,28 +73,70 @@ fun evalProp prop =
 ;
 
 ***********************************************************************
-(* pruebas *)
+(* Pruebas de corrida *)
 
-val f = constante false
-val t = constante true
+val f = constante false;
+val t = constante true;
 
-val prop1 = f :=>: f :<=>: ~: f :=>: ~: f
-val prop2 = f :=>: f :<=>: ~: f :||: f
-;
+val prop1 = f :=>: f :<=>: ~: f :=>: ~: f;
+val prop2 = f :=>: f :<=>: ~: f :||: f;
 
 val p = f;
 val q = t;
 
-val prop3 = p :=>: q :<=>: ~: p :||: q
-val prop4 = p :=>: q :<=>: ~: q :=>: ~: p
-;
+val prop3 = p :=>: q :<=>: ~: p :||: q;
+val prop4 = p :=>: q :<=>: ~: q :=>: ~: p;
 
 ***********************************************************************
-(* Funciones *)
+(* ANTHONY ULLOA - 2018290801 *)
+(* Funcion VARS - Datatype Arbol *)
+datatype Arbol =
+  Nulo
+| Nodo of Arbol * Proposicion * Arbol
+;
+(* Intento de separacion - Resultado: Fallo *)
+fun separacionX (x::xs, ch) = 
+   if x = true then 
+      1 + separacionX(xs,ch) 
+   else 
+      separacionX(xs,ch)
+| separacionX  (_, ch) = 0;
+fun separacion(s,ch) = cntcaux(String.explode s, ch);
 
-fun cntcaux (h::xs, ch) = if h = ch then 1 + cntcaux(xs,ch) else cntcaux(xs,ch)
-  | cntcaux  (_, ch) = 0;
-fun cntc(s,ch) = cntcaux(String.explode s, ch);
+(* Intento de creacion arbol - Resultado: Fallo *)
+fun ins n Nulo               = Nodo (Nulo, n, Nulo)
+|   ins n (Nodo (ai, m, ad)) =
+      if n < m then
+      	Nodo (ins n ai, m, ad)
+      else if n > m then
+      	Nodo (ai, m, ins n ad)
+      else (* n = m *)
+      	Nodo (ai, m, ad)
+;
+
+(* Otorgarle un numero a cada proposicion - Resultado: Inconcluso*)
+
+fun poblar arb []        = arb
+|   poblar arb (n :: ns) = poblar (ins n arb) ns
+;
+
+fun ird Nulo               = []
+|   ird (Nodo (ai, m, ad)) = (ird ai) @  [m] @ (ird ad)
+;
+
+val prueba1 = poblar Nulo [10, 1, 5, 4 , 100, 0, 20, 4]
+;
+
+(* Verificacion de tipos - Resultado: Fallo*)
+
+fun prueba n = 
+if f = constante false then 
+   n = true 
+else if f = constante true then 
+   n = true 
+else 
+   n = false;
+
 
 fun vars
 fun evalProp
