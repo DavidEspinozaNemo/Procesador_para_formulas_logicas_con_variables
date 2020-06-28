@@ -81,4 +81,4 @@ fun aux_vars prop =
 			   end
 ;
 
-fun vars prop = nub aux_vars prop;
+fun vars prop = nub (aux_vars prop);
