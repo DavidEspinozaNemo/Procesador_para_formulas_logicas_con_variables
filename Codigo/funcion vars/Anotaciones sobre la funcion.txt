@@ -16,3 +16,6 @@ line 45, characters 6-11:
 !   'a list
 Se resolvio buscando los tipos de datos, era un problema relacionada a los tipos de datos
 string y lista de strings.
+
+Otro problema es que me retorna todos las variables existentes, pero eso lo resolvimos con un filter, que filtra todos los repetidos.
+Los principales errores son de tipo de datos.
