@@ -31,10 +31,12 @@ val (op :<=>:) = equivalencia
 (* El ejemplo de entrada *)
 val p = variable "p";
 val q = variable "q";
+val r = variable "r";
 val f = constante false;
 val t = constante true;
 val prop1 = p :=>: q :<=>: ~: p :||: q;
 val prop2 = f :=>: p :<=>: q :=>: ~: f;
+val prop3 = r :=>: p :&&: q :<=>: r :||: q :=>: ~: r;
 (* funciones auxiliares *)
 (* filter filtra una lista de acuerdo con un predicado p *)
 
