@@ -1,0 +1,18 @@
+Encargado: David Espinoza
+vars es una funcion que resive un dato tipo Proposicion, y debe devolver una lista de string.
+usando como ejemplo la funcion evalProp del archivo "pruebas evalProp.txt" que el profesor proporciono.
+
+Esta funcion ejemplifica el uso de la recursion.
+La idea principal es recorrer todo dato Proposicion, hasta encontrar una variable. 
+En caso de que no encuentre debera devolver un arreglo vacio.
+
+Error 1. No puedo simplemente devolver valor, debo devolverlo como string.
+line 45, characters 6-11:
+!                       => valor
+!                          ^^^^^
+! Type clash: expression of type
+!   string
+! cannot have type
+!   'a list
+Se resolvio buscando los tipos de datos, era un problema relacionada a los tipos de datos
+string y lista de strings.
