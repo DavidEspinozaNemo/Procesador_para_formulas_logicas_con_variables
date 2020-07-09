@@ -1,4 +1,5 @@
 (* Distributiva *)
+(* Anthony Ulloa *)
 
 fun dis prop = 
 	case prop of

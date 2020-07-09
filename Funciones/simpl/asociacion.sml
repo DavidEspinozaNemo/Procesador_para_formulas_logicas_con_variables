@@ -1,4 +1,5 @@
 (* Asociativa *)
+(* Anthony Ulloa *)
 
 fun aso prop = 
 	case prop of

@@ -1,5 +1,6 @@
 (* De Morgan *)
-(* No sirve todavia *)
+(* Anthony Ulloa *)
+
 fun de_morgan prop = 
 	case prop of 
 		constante valor

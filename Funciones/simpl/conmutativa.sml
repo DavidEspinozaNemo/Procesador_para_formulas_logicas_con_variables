@@ -1,4 +1,5 @@
 (* Conmutativa *)
+(* Anthony Ulloa *)
 
 fun com prop = 
 	case prop of
@@ -18,4 +19,4 @@ fun com prop =
 			=> equivalencia (com prop1, com prop2)
 ;
 
-(* ejemplo: com ( f :||: p :<=>: q :&&: f); *)
+(* ejemplo: com ( f :||: p :<=>: q :&&: f ); *)
