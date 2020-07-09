@@ -1,3 +1,5 @@
+(* ANTHONY ULLOA - 2018290801 *)
+(* Pruebas de Codigo *)
 (* Valores semánticos.
    Nuestro lenguaje es muy sencillo, solo admite literales booleanas *)
 
@@ -88,7 +90,6 @@ val prop3 = p :=>: q :<=>: ~: p :||: q;
 val prop4 = p :=>: q :<=>: ~: q :=>: ~: p;
 
 ***********************************************************************
-(* ANTHONY ULLOA - 2018290801 *)
 (* Funcion VARS - Datatype Arbol *)
 datatype Arbol =
   Nulo
@@ -127,21 +128,78 @@ fun ird Nulo               = []
 val prueba1 = poblar Nulo [10, 1, 5, 4 , 100, 0, 20, 4]
 ;
 
-(* Verificacion de tipos - Resultado: Fallo*)
+***********************************************************************
+(* Pruebas de as_val *)
+fun zipT []            []            = []
+|   zipT ([x,z] :: xs) ([y,w] :: ys) = [(x, y),(z, w)] :: zipT xs ys
+|   zipT []            _             = [] 
+|   zipT _             _             = [] 
+;
 
-fun prueba n = 
-if f = constante false then 
-   n = true 
-else if f = constante true then 
-   n = true 
-else 
-   n = false;
+fun zipR []        []            = [] 
+|   zipR (x :: xs) ([y,w] :: ys) = [(x, y),(x, w)] :: zipR xs ys
+|   zipR []        _             = [] 
+|   zipR _         _             = []
+;
 
+fun zip1 []       []          = [] 
+|   zip1 ([x])    ([y] :: ys) = (x, y) :: zip1 [x] ys (* Para gen_bool(1) *)
+|   zip1 []       _           = [] 
+|   zip1 _        _           = [] 
+;
 
-fun vars
-fun evalProp
-fun gen_bools
-fun as_vals
-fun taut
-fun fnd
-fun simpl
+fun zip2 []        []            = []
+|   zip2 ([x, z])  ([y,w] :: ys) = [(x, y),(z, w)] :: zip2 [x, z] ys (* Para gen_bool(2) *)
+|   zip2 []        _             = [] 
+|   zip2 _         _             = []
+;
+
+fun zip3 []          []                  = []
+|   zip3 ([x])       ([y] :: ys)         = [(x, y)] :: zip3 [x] ys (* Para gen_bool(1) *)
+|   zip3 ([x, z])    ([y, w] :: ys)      = [(x, y),(z, w)] :: zip3 [x, z] ys (* Para gen_bool(2) *)
+|   zip3 ([x, z, p]) ([y, w , k] :: ys)  = [(x, y),(z, w),(p, k)] :: zip3 [x, z, p] ys (* Para gen_bool(3) *)
+|   zip3 []          _                   = [] 
+|   zip3 _           _                   = []
+;
+
+fun zipP []        []        = []
+|   zipP (x :: xs) (y :: ys) = (x, y) :: zipP xs ys
+|   zipP []        _         = [] 
+|   zipP _         _         = [] 
+;
+
+(* Resultado de zipT *)
+(* Se obtiene este resultado favorable debido a que se usa una lista de variables Trucada *)
+(* Se logro usando zipT lista0 lista4; *)
+[
+   [("p", false), ("q", false)], 
+   [("p", true),  ("q", false)],
+   [("p", false), ("q", true) ], 
+   [("p", true),  ("q", true) ]
+]
+
+(* Resultado de zipR *)
+(* Se obtiene este resultado erroneo debido a que la lista Repite el valor *)
+(* Se logro usando zipR lista3 lista4; *)
+[
+   [("p", false), ("p", false)], 
+   [("q", true),  ("q", false)]
+]
+
+(* Resultado de zip1 *)
+(* Se obtiene este resultado favorable para gen_bool(1) *)
+(* Se logro usando zip1 lista1 lista2; *)
+[
+   [("p", false)], 
+   [("p", true)]
+]
+
+(* Resultado de zip2 *)
+(* Se obtiene este resultado favorable con gen_bool(2) *)
+(* Se logro usando zip2 lista3 lista4; *)
+[
+   [("p", false), ("q", false)], 
+   [("p", true),  ("q", false)],
+   [("p", false), ("q", true) ], 
+   [("p", true),  ("q", true) ]
+]
