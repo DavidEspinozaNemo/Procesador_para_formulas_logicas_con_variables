@@ -21,6 +21,8 @@ fun aso prop =
 			=> implicacion (aso prop1, aso prop2)
 	|	equivalencia (prop1, prop2)
 			=> equivalencia (aso prop1, aso prop2)
+	|	_
+			=> prop
 ;
 
 (* ejemplo: aso ( f :||: (q :||: p) :=>:  (f :&&: q) :&&: p ); *)

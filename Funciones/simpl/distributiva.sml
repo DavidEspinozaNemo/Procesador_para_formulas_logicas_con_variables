@@ -23,6 +23,8 @@ fun dis prop =
 			=> implicacion (dis prop1, dis prop2)
 	|	equivalencia (prop1, prop2)
 			=> equivalencia (dis prop1, dis prop2)
+	|	_
+			=> prop
 ;
 
 (* ejemplo: dis ( (f :||: p) :&&: (f :||: q) :=>: (f :&&: p) :||: (f :&&: q) ); *)
