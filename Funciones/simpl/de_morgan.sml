@@ -1,5 +1,5 @@
 (* De Morgan *)
-(* Anthony Ulloa *)
+(* Anthony Ulloa - Jasson Gonzalez *)
 
 fun de_morgan prop = 
 	case prop of 
