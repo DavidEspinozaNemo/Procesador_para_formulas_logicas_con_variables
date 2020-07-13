@@ -25,8 +25,9 @@ fun cont_elem_prop prop =
 			=> 1 + cont_elem_prop prop1 + cont_elem_prop prop2
 ;
 
-fun simpv2 prop = 
+fun simpv2 prop 5 = simp prop
+fun simpv2 prop n = 
 	if ( cont_elem_prop (simp prop) ) < ( cont_elem_prop prop )
 	then simp prop
-	else simpv2 (simp prop)
+	else simpv2 (simp prop) (n+1)
 ;
