@@ -1,10 +1,3 @@
-fun simp prop = 
-    aso(com(de_morgan(dis(doble_neg(idempotencia(neutro(prop)))))))
-;
-
-(* sugerencia simp v2 *)
-(* David Espinoza *)
-
 (* funcion contar elementos de de una proposicion *)
 
 fun cont_elem_prop prop = 
@@ -23,10 +16,4 @@ fun cont_elem_prop prop =
 			=> 1 + cont_elem_prop prop1 + cont_elem_prop prop2
 	|	equivalencia (prop1, prop2)
 			=> 1 + cont_elem_prop prop1 + cont_elem_prop prop2
-;
-
-fun simpv2 prop = 
-	if ( cont_elem_prop (simp prop) ) < ( cont_elem_prop prop )
-	then simp prop
-	else simpv2 (simp prop)
 ;
