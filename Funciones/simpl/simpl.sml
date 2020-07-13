@@ -27,7 +27,7 @@ fun cont_elem_prop prop =
 
 fun simpv2 prop 5 = simp prop
 fun simpv2 prop n = 
-	if ( cont_elem_prop (simp prop) ) < ( cont_elem_prop prop )
+	if ( ( cont_elem_prop (simp prop) ) < ( cont_elem_prop prop ) )
 	then simp prop
-	else simpv2 (simp prop) (n+1)
+	else simpv2 (simp prop) (n + 1)
 ;
