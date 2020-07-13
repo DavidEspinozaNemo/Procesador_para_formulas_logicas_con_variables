@@ -1,5 +1,5 @@
 (* gen_bools opcional *)
-(* echo por el profesor *)
+(* Hecho por el profesor *)
 (* No hace falta recibir algo como lista
 
 fun add [x] xs = [x] @ xs;

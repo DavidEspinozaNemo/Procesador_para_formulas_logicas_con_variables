@@ -1,5 +1,5 @@
 Encargado: David Espinoza
-vars es una funcion que resive un dato tipo Proposicion, y debe devolver una lista de string.
+vars es una funcion que recibe un dato tipo Proposicion, y debe devolver una lista de string.
 usando como ejemplo la funcion evalProp del archivo "pruebas evalProp.txt" que el profesor proporciono.
 
 Esta funcion ejemplifica el uso de la recursion.

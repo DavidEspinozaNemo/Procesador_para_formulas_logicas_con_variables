@@ -1,3 +1,6 @@
+//Codigo de ejemplo creado para explicar idea sobre funciones iniciales
+//Jasson Gonzalez
+
 const as_val = (lista_variables_proposicionales, lista_valores_booleanos, asignaciones_finales) => {
     if(asignaciones_finales.length == lista_valores_booleanos.length){
         return asignaciones_finales;
