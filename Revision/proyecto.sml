@@ -129,8 +129,8 @@ fun gen_bools 1 = [[true, false]]
 |   gen_bools n = (map (add [true] ) (gen_bools (n-1))) @ (map (add [false] ) (gen_bools (n-1)));
 
 (* as_vals *)
-fun add []    []    = []
-|   add (x)   (y)   = (x) @ (y)
+fun addLista []    []    = []
+|   addLista (x)   (y)   = (x) @ (y)
 ;
 
 fun as_val_aux []        []               = []
@@ -140,7 +140,7 @@ fun as_val_aux []        []               = []
 ;
 
 fun as_val   []          []               = []
-|   as_val   (x :: xs)   ((y::js) :: ys)  = add [(x, y)] (as_val_aux xs js) :: as_val (x :: xs) ys
+|   as_val   (x :: xs)   ((y::js) :: ys)  = addLista [(x, y)] (as_val_aux xs js) :: as_val (x :: xs) ys
 |   as_val   []          _                = []
 |   as_val   _           _                = []
 ;
