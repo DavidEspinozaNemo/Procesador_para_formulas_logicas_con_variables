@@ -71,7 +71,7 @@ fun aux_vars prop =
 
 fun vars prop = nub (aux_vars prop);
 
-(* evalProp *)
+(* eval_prop *)
 fun last(xs) =
 case xs of
     [] => raise List.Empty
@@ -85,7 +85,7 @@ fun get_value (nombreVariable: string, lista: (string*bool) list) =
     then #2 (hd lista)
     else get_value (nombreVariable, tl lista);
 
-fun evalProp (prop, contexto) =
+fun eval_prop (prop, contexto) =
   case prop of
    constante valor
        => valor
@@ -93,27 +93,27 @@ fun evalProp (prop, contexto) =
     variable valor
        => get_value(valor, contexto)
   | negacion prop1
-       => not (evalProp (prop1, contexto))
+       => not (eval_prop (prop1, contexto))
   | conjuncion (prop1, prop2)
-       => let val valor1 = evalProp (prop1, contexto)
-              and valor2 = evalProp (prop2, contexto)
+       => let val valor1 = eval_prop (prop1, contexto)
+              and valor2 = eval_prop (prop2, contexto)
           in  valor1 andalso valor2
           end
   | disyuncion (prop1, prop2)
-       => let val valor1 = evalProp (prop1, contexto)
-              and valor2 = evalProp (prop2, contexto)
+       => let val valor1 = eval_prop (prop1, contexto)
+              and valor2 = eval_prop (prop2, contexto)
           in  valor1 orelse valor2
           end
   | implicacion (prop1, prop2)
-       => let val valor1 = evalProp (prop1, contexto)
-              and valor2 = evalProp (prop2, contexto)
+       => let val valor1 = eval_prop (prop1, contexto)
+              and valor2 = eval_prop (prop2, contexto)
           in  case (valor1, valor2) of
                 (true, false) => false
               | _             => true
           end
   | equivalencia (prop1, prop2)
-       => let val valor1 = evalProp (prop1, contexto)
-              and valor2 = evalProp (prop2, contexto)
+       => let val valor1 = eval_prop (prop1, contexto)
+              and valor2 = eval_prop (prop2, contexto)
           in  valor1 = valor2
           end
 ;
@@ -159,7 +159,7 @@ fun cont_vars [] = 0
 
 fun aux_taut_logic prop [] = "Es una Tautologia"
 | aux_taut_logic prop (x::xs) = 
-	if (evalProp (prop, x) )
+	if (eval_prop (prop, x) )
 	then aux_taut_logic prop xs
 	else "No es Tautologia por que; " ^ print_context x ^ " hacen falsa la propocicion."
 	
@@ -367,6 +367,6 @@ fun aso prop =
 ;
 
 (* simpl *)
-fun simp prop = 
+fun simpl prop = 
     aso(com(de_morgan(dis(doble_neg(idempotencia(neutro(prop)))))))
 ;
